@@ -196,7 +196,7 @@
           <span class="badge">${img.has4k ? "4K" : "HD"} • ${img.category.replace("-", " & ").toUpperCase()}</span>
         </div>
         <button class="fav-toggle ${isFav ? "is-fav" : ""}" aria-label="Toggle favorite" aria-pressed="${isFav}">${isFav ? "♥" : "♡"}</button>
-        <img loading="lazy" alt="${img.title} — ${img.quote}" data-src="${img.thumbUrl}">
+        <img loading="lazy" width="480" height="600" alt="${img.title} — ${img.quote}" data-src="${img.thumbUrl}">
         <div class="card-quote-overlay">${img.quote}</div>
       </div>
       <div class="card-body">
