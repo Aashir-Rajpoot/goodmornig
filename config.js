@@ -14,7 +14,7 @@ const CONFIG = {
   //             as images.json: { categories: [...], images: [...] }
   PROVIDER: "local",
 
-  LOCAL_DATA_URL: "data/images.json",
+  LOCAL_DATA_URL: "images.json",
   API_ENDPOINT: "/api/images", // used only when PROVIDER === "api"
 
   // How many cards to render per page/scroll batch.
