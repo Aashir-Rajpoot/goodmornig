@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Morning — Daily Morning Image Gallery</title>
+<meta name="description" content="A fresh collection of Good Morning images every day. Browse, favorite, and download beautiful morning photography.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-row">
+    <a href="#home" class="logo" data-nav="home">
+      <span class="logo-mark" aria-hidden="true">☀</span>
+      <span class="logo-text">Good Morning</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <a href="#home" data-nav="home" class="nav-link active">Home</a>
+      <a href="#today" data-nav="today" class="nav-link">Today's Images</a>
+      <a href="#categories" data-nav="categories" class="nav-link">Categories</a>
+      <a href="#favorites" data-nav="favorites" class="nav-link">Favorites <span class="nav-count" id="favCount">0</span></a>
+      <a href="#downloads" data-nav="downloads" class="nav-link">Downloads <span class="nav-count" id="dlCount">0</span></a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="search-row">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><path d="M21 21l-4.35-4.35M18 10.5a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input type="search" id="searchInput" placeholder="Search Good Morning images... (flowers, coffee, sunrise, mountains...)" aria-label="Search images">
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- TODAY'S GOOD MORNING -->
+  <section class="today-hero" id="today">
+    <div class="today-visual">
+      <img id="todayImg" src="" alt="" loading="eager">
+      <div class="today-overlay">
+        <p class="today-eyebrow" id="todayDate">GOOD MORNING</p>
+        <h1 class="today-quote" id="todayQuote">Good Morning</h1>
+        <p class="today-sub">Have a peaceful and beautiful day.</p>
+      </div>
+    </div>
+    <div class="today-panel">
+      <p class="today-panel-kicker">Today's featured pick</p>
+      <h2 class="today-panel-title">Start your day with something beautiful.</h2>
+      <p class="today-panel-copy">Every image comes from a growing collection, chosen so it never repeats until the whole set has had its turn. A new featured photo greets you each day.</p>
+      <div class="today-actions">
+        <button class="btn btn-primary" id="exploreBtn">Explore Today's Images</button>
+        <button class="btn btn-outline" id="downloadTodayBtn">Download Today's Image</button>
+      </div>
+      <button class="refresh-link" id="refreshMorningBtn">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20 11A8 8 0 105.5 16.5M4 4v6h6M20 20v-6h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Refresh Morning
+      </button>
+      <div class="stats-row">
+        <div class="stat"><strong id="statTotal">0</strong><span>Morning Images</span></div>
+        <div class="stat"><strong id="statToday">0</strong><span>Today: Fresh Images</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories-row" id="categories" aria-label="Filter by category">
+    <div class="chip-scroller" id="categoryChips">
+      <button class="chip active" data-category="all">All</button>
+      <!-- category chips injected by app.js -->
+    </div>
+  </section>
+
+  <!-- VIEW LABEL / RESULT INFO -->
+  <div class="view-bar">
+    <h2 class="view-title" id="viewTitle">Today's Images</h2>
+    <p class="view-meta" id="viewMeta"></p>
+  </div>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery" aria-live="polite"></section>
+
+  <p class="empty-state" id="emptyState" hidden>No morning images match that search yet. Try another word, like "flowers" or "coffee".</p>
+
+  <div class="load-sentinel" id="loadSentinel" aria-hidden="true"></div>
+
+</main>
+
+<footer class="site-footer">
+  <p>Good Morning — a daily image gallery. Favorites and downloads are stored only in your browser; nothing is uploaded anywhere.</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <button class="lb-close" id="lbClose" aria-label="Close viewer">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
+
+  <div class="lb-stage">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-quote" id="lbQuote"></div>
+  </div>
+
+  <div class="lb-bar">
+    <div class="lb-info">
+      <span id="lbTitle"></span>
+      <span class="lb-res" id="lbRes"></span>
+    </div>
+    <div class="lb-actions">
+      <button class="icon-btn" id="lbFavorite" aria-label="Toggle favorite">♡</button>
+      <button class="icon-btn" id="lbShare" aria-label="Share image">Share</button>
+      <div class="lb-download-group">
+        <button class="icon-btn" id="lbDownloadHD">Download Full HD</button>
+        <button class="icon-btn" id="lbDownload4K" hidden>Download 4K</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
